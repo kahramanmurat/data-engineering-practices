@@ -3,11 +3,11 @@ import botocore
 import gzip
 import io
 import time
+import os
 
 
 def download_file_with_retry(s3, bucket_name, object_key, max_retries=5):
     delay = 1
-    max_retries = 5
 
     for retry in range(max_retries):
         try:
@@ -49,7 +49,17 @@ def stream_file_lines(file_stream):
 
 
 def main():
-    s3 = boto3.client("s3")
+
+    AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
+    AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+    AWS_DEFAULT_REGION = os.getenv("AWS_DEFAULT_REGION")
+
+    s3 = boto3.client(
+        "s3",
+        aws_access_key_id=AWS_ACCESS_KEY_ID,
+        aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
+        region_name=AWS_DEFAULT_REGION,
+    )
     bucket_name = "commoncrawl"
     object_key = "crawl-data/CC-MAIN-2022-05/wet.paths.gz"
 
