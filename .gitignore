@@ -1,8 +1,8 @@
 *.idea*
 *.DS_Store*
 *postgres-data*
-*downloads/
+*downloads*
 *downloaded_files/
-*data/*
+*data*
 *Untitled.ipynb*
-*.ipynb_checkpoints/*
+*.ipynb_checkpoints*
