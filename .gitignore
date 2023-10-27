@@ -6,3 +6,5 @@
 *data*
 *Untitled.ipynb*
 *.ipynb_checkpoints*
+*reports*
+*.pytest_cache*

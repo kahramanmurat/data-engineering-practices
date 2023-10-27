@@ -8,6 +8,12 @@ from pyspark.sql import DataFrame
 from pyspark.sql.functions import date_format, datediff, col, rank, avg, first,desc,row_number,lit
 from pyspark.sql.window import Window
 
+spark = SparkSession.builder.appName("Exercise6").enableHiveSupport().getOrCreate()
+ # Define the selected columns to filter by
+selected_columns = ["trip_id", "start_time", "end_time", "bikeid", "tripduration", "from_station_id", "from_station_name",
+                        "to_station_id", "to_station_name", "usertype", "gender", "birthyear"]
+
+
 # Define the function to load data from zipped CSV files
 def load_data(folder_path):
     zip_files = [os.path.join(folder_path, file_name) for file_name in os.listdir(folder_path) if file_name.endswith(".zip")]
@@ -50,11 +56,6 @@ def combine_dataframes(data_frames):
         return None
 
 def main():
-    spark = SparkSession.builder.appName("Exercise6").enableHiveSupport().getOrCreate()
-
-    # Define the selected columns to filter by
-    selected_columns = ["trip_id", "start_time", "end_time", "bikeid", "tripduration", "from_station_id", "from_station_name",
-                        "to_station_id", "to_station_name", "usertype", "gender", "birthyear"]
 
     # Define the path to the folder containing the zip files
     folder_path = "data"  # Replace with the path to your data folder
